@@ -26,20 +26,22 @@ async function main() {
     // ToDo Bonus: Only updated files from last run. We dont need to re-run this for old files that have not been updated.
     // Step 3: Convert the .pdf file to .md.
     const files = (await fs.readdir(INPUT_DIR)).filter(x=> x.endsWith('.pdf'));
-    console.log(files);
-    console.log("main finished");
+
 
     for (const file of files) {
         const filePath = path.join(INPUT_DIR, file);
         const dataBuffer = fs.readFileSync(filePath);
+        console.log(`\\u{1F7E2} Processing: ${file}`);
 
-        // read in the pdf data from pdf-parse
+        //ToDo: begin converting the pages into images.
+        //ToDo: begin OCRing each page.
+
         // ToDo Bonus: Check that the pdf is not empty.
-        // const data = await pdf(dataBuffer);
-        const outputPath = path.join(OUTPUT_DIR, file.replace(/\.pdf$/, '.md'));
 
-        // await fs.outputFile(outputPath, data.text.trim());
-        console.log(`Converted: ${outputPath}`);
+        const fakeText = `# ${file}\n\n_This is fake OCR output for testing._`;
+        const outputPath = path.join(OUTPUT_DIR, file.replace(/\.pdf$/, '.md'));
+        await fs.writeFile(outputPath, fakeText);
+        console.log(`\\u{2705} Wrote to ${outputPath}`);;
     }
 }
 /*
