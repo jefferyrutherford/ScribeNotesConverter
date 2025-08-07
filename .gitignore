@@ -1,0 +1,15 @@
+# Node modules
+node_modules/
+
+# Log files
+*.log
+
+# OS-specific files
+.DS_Store
+
+#Dont include the files
+notes-final/
+scribe-files/
+
+# Env
+.env

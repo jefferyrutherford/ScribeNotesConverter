@@ -1,0 +1,22 @@
+{
+  "name": "scribe-to-obsidian",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/main.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "axios": "^1.11.0",
+    "dotenv": "^17.2.1",
+    "fs-extra": "^11.3.1",
+    "googleapis": "^155.0.0",
+    "markdown-table": "^3.0.4",
+    "pdf-parse": "^1.1.1",
+    "tesseract.js": "^6.0.1"
+  }
+}
