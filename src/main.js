@@ -1,6 +1,8 @@
 const fs = require('fs-extra');
 const path = require('path');
-const pdf = require('pdf-parse')
+// pdf-parse cant read it as an image
+// It looks like Amazon just takes a picture, I might need to use something else.
+//const pdf = require('pdf-parse')
 
 
 const INPUT_DIR = path.join(__dirname, '../scribe-files');
@@ -8,7 +10,7 @@ const OUTPUT_DIR = path.join(__dirname, '../notes-final');
 
 
 async function main() {
-
+    // OK,
     // Step 1: Make sure the 2 file directories exist or can be created without any issue.
     try {
         await fs.ensureDir(OUTPUT_DIR);
@@ -32,12 +34,25 @@ async function main() {
 
         // read in the pdf data from pdf-parse
         // ToDo Bonus: Check that the pdf is not empty.
-        const data = await pdf(dataBuffer);
+        // const data = await pdf(dataBuffer);
         const outputPath = path.join(OUTPUT_DIR, file.replace(/\.pdf$/, '.md'));
 
-        await fs.outputFile(outputPath, data.text.trim());
+        // await fs.outputFile(outputPath, data.text.trim());
         console.log(`Converted: ${outputPath}`);
     }
+}
+/*
+    Lets try to use Tesseract to convert the pictures to txt.
+    URL: https://tesseract.projectnaptha.com/
+    GitHub: https://github.com/naptha/tesseract.js#tesseractjs
+ */
+async function runOCROnImage(imagePath) {
+    const { data: { text } } = Tesseract.recognize(
+        imagePath,
+        'eng',
+        { logger: m => console.log(m)}
+    );
+    return text;
 }
 
 main();
